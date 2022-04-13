@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="../assets/css/untitled-1.css">
         <link rel="stylesheet" href="../assets/css/untitled.css">
         <link rel="stylesheet" href="./css/index.css">
+        <link rel="stylesheet" href="./css/signup.css">
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/intro.js@2.9.3/intro.min.js"></script>
@@ -26,6 +27,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.js"></script>
         <script type="text/javascript" src="../assets/js/freelancer.js"></script>
         <script src="./js/index.js"></script>
+        <script src="./js/signup.js"></script>
     </head>
 
     <body id="page-top">
@@ -38,13 +40,13 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="nav navbar-nav ml-auto">
                         <li class="nav-item mx-0 mx-lg-1" role="presentation">
-                            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">
-                                Strumenti
+                            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./index.html">
+                                Home
                             </a>
                         </li>
                         <li class="nav-item mx-0 mx-lg-1" role="presentation">
-                            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./signup.html">
-                                Sign-up
+                            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./login.html">
+                                Log-in
                             </a>
                         </li>
                         <!-- 'tour' della pagina-->
@@ -64,6 +66,7 @@
         <!-- section centrale con i vari collegamenti -->
         <section id="portfolio" class="portfolio" data-intro="Strumenti finanziari disponibili su Data-View"
             data-step="1">
+
             <div class="container">
                 <br />
                 <h2 class="text-uppercase text-center text-secondary">Sign up</h2>
@@ -96,6 +99,10 @@
                         <br />
                     </form>
                 </div>
+            </div>
+
+            <div class="alert alert-danger mx-auto" id="errore">
+                <strong>Errore!</strong>
             </div>
 
             <div class="modal fade" id="myModal">
@@ -158,10 +165,10 @@
 
 
 
-        <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../assets/js/jquery.min.js"></script>
+        <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-        <script src="assets/js/freelancer.js"></script>
+        <script src="../assets/js/freelancer.js"></script>
     </body>
 
 </html>

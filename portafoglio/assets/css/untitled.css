@@ -1,0 +1,46 @@
+.col-lg-4.mr-auto {
+  text-align: center;
+}
+
+.container,
+.container-lg,
+.container-md,
+.container-sm,
+.container-xl {
+  text-align: center;
+}
+
+#description {
+  text-align: center;
+  width: 50%;
+  margin-left: 25%;
+}
+
+#location {
+  float: left;
+  width: 50%;
+}
+
+#social {
+  width: 50%;
+  float: right;
+}
+
+#portfolio {
+  align-items: center;
+}
+
+#showMore-div {
+  align-items: center;
+  width: 100%;
+}
+
+.fondo {
+  position: relative;
+  bottom: 0%;
+  width: 100%;
+}
+
+#myChart{
+  width: 100%;
+}
