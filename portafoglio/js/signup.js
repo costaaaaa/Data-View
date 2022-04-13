@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    $('#errore').hide();
     var queryString = window.location.search;
     var urlParams = new URLSearchParams(queryString);
     var res = urlParams.get('res');
