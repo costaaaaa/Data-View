@@ -1,0 +1,22 @@
+#azioni {
+  text-align: center;
+  align-items: center;
+}
+
+#caricamento {
+  text-align: center;
+  border-left: 45%;
+}
+
+#load {
+  align-items: center;
+  min-width: 100%;
+  min-height: 100%;
+  background-color: #18bc9c;
+  width: 100%;
+  height: 100%;
+}
+
+#dati-azione {
+  text-align: left;
+}

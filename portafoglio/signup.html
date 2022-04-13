@@ -20,7 +20,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/intro.js@2.9.3/intro.min.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/intro.js@2.9.3/introjs.css" rel="stylesheet" />
-        
+
         <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
         <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script> -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.js"></script>
@@ -30,7 +30,8 @@
 
     <body id="page-top">
         <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-secondary text-uppercase" id="mainNav">
-            <div class="container"><a class="navbar-brand js-scroll-trigger" href="#page-top">Data-View</a><button data-toggle="collapse" data-target="#navbarResponsive"
+            <div class="container"><a class="navbar-brand js-scroll-trigger" href="#page-top">Data-View</a><button
+                    data-toggle="collapse" data-target="#navbarResponsive"
                     class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded"
                     aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i></button>
@@ -60,77 +61,63 @@
             </div>
         </nav>
 
-        <!-- section con logo, nome e 'descrizione'-->
-        <header class="masthead bg-primary text-white text-center">
-            <div class="container"><img class="img-fluid d-block mx-auto mb-5" src="./img/logo.ico">
-                <h1>Data-View</h1>
-                <hr class="star-light mx-auto">
-                <h2 class="font-weight-light mb-0">Cerca, visualizza e analizza dati di azioni, ETF e crypo</h2>
-            </div>
-        </header>
-
         <!-- section centrale con i vari collegamenti -->
-        <section id="portfolio" class="portfolio" data-intro="Strumenti finanziari disponibili su Data-View" data-step="1">
+        <section id="portfolio" class="portfolio" data-intro="Strumenti finanziari disponibili su Data-View"
+            data-step="1">
             <div class="container">
-                <br/>
-                <h2 class="text-uppercase text-center text-secondary">Strumenti finanziari</h2>
+                <br />
+                <h2 class="text-uppercase text-center text-secondary">Sign up</h2>
                 <hr class="star-dark mb-5 mx-auto">
                 <div class="row">
-                    <div class="col-md-6 col-lg-4">
-                        <a class="d-block mx-auto portfolio-item" data-toggle="modal" href="./home_azioni.html" id="linkAzioni">
-                            <div class="d-flex portfolio-item-caption position-absolute h-100 w-100">
-                                <div class="my-auto portfolio-item-caption-content w-100 text-center text-white">
-                                    <i class="fa fa-search-plus fa-3x"></i>
-                                </div>
-                            </div><br /><br /><br /><br />
-                            <h1>Azioni<br /></h1><br /><br /><br />
-                        </a>
-                    </div>
-
-                    <div class="col-md-6 col-lg-4">
-                        <a class="d-block mx-auto portfolio-item" data-toggle="modal" href="./home_ETF.html" id="linkETF">
-                            <div class="d-flex portfolio-item-caption position-absolute h-100 w-100">
-                                <div class="my-auto portfolio-item-caption-content w-100 text-center text-white">
-                                    <i class="fa fa-search-plus fa-3x"></i>
-                                </div>
-                            </div><br /><br /><br /><br />
-                            <h1>ETF<br /></h1><br /><br /><br />
-                        </a>
-                    </div>
-
-                    <div class="col-md-6 col-lg-4">
-                        <a class="d-block mx-auto portfolio-item" data-toggle="modal" href="#portfolio-modal-1" id="linkCrypto" data-toggle="modal" data-target="#myModal">
-                            <div class="d-flex portfolio-item-caption position-absolute h-100 w-100">
-                                <div class="my-auto portfolio-item-caption-content w-100 text-center text-white">
-                                    <i class="fa fa-search-plus fa-3x"></i>
-                                </div>
-                            </div><br /><br /><br /><br />
-                            <h1>Crypto<br /></h1><br /><br /><br />
-                        </a>
-                    </div>
+                    <form action="./api/index.php" method="POST" class="mx-auto">
+                        <input type="hidden" name="action" value="signup">
+                        <label for="nick" class="login-label">Nickname:</label>
+                        <br />
+                        <input name="nick" type="text" class="login-text" required></input>
+                        <br />
+                        <br />
+                        <label for="email" class="login-label">Email:</label>
+                        <br />
+                        <input name="email" type="email" class="login-text" required></input>
+                        <br />
+                        <br />
+                        <label for="password" class="login-label">Password:</label>
+                        <br />
+                        <input name="password" type="password" class="login-text password-char" required></input>
+                        <br />
+                        <p class="signup-error"></p>
+                        <br />
+                        <br />
+                        <br />
+                        <button class="onboard login-custom-button btn btn-primary" type="submit">
+                            Sign-up
+                        </button>
+                        <br />
+                        <br />
+                    </form>
                 </div>
             </div>
 
             <div class="modal fade" id="myModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
-            
+
                         <!-- Modal Header -->
                         <div class="modal-header">
                             <h4 class="modal-title">Errore</h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
-            
+
                         <!-- Modal body -->
                         <div class="modal-body">
                             Pagina ancora in fase di creazione
                         </div>
-            
+
                         <!-- Modal footer -->
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                         </div>
-            
+
                     </div>
                 </div>
             </div>
@@ -178,3 +165,35 @@
     </body>
 
 </html>
+
+<!--
+
+
+
+    <form action="./api/index.php" method="POST">
+                        <input type="hidden" name="action" value="signup">
+                        <label for="nick" class="login-label">Nickname:</label>
+                        <br/>
+                        <input name="nick" type="text" class="login-text" required></input>
+                        <br/>
+                        <br/>
+                        <label for="email" class="login-label">Email:</label>
+                        <br/>
+                        <input name="email" type="email" class="login-text" required></input>
+                        <br/>
+                        <br/>
+                        <label for="password" class="login-label">Password:</label>
+                        <br/>
+                        <input name="password" type="password" class="login-text password-char" required></input>
+                        <br/>
+                        <p class="signup-error"></p>
+                        <br/>                        
+                        <br/>
+                        <br/>
+                        <button  class="onboard login-custom-button" type="submit">
+                            Sign-up
+                        </button>
+                        <br/>
+                        <br/>
+                    </form>
+-->
