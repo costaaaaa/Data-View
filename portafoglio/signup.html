@@ -74,7 +74,27 @@
                 <div class="row">
                     <form action="./api/index.php" method="POST" class="mx-auto">
                         <input type="hidden" name="action" value="signup">
-                        <label for="nick" class="login-label">Nickname:</label>
+                        <label for="nome" class="login-label">Nome:</label>
+                        <br />
+                        <input name="nome" type="text" class="login-text" required></input>
+                        <br />
+                        <br />
+                        <label for="cognome" class="login-label">Cognome:</label>
+                        <br />
+                        <input name="cognome" type="text" class="login-text" required></input>
+                        <br />
+                        <br />
+                        <label for="nick" class="login-label">Username:</label>
+                        <br />
+                        <input name="nick" type="text" class="login-text" required></input>
+                        <br />
+                        <br />
+                        <label for="nick" class="login-label">Sesso:</label>
+                        <br />
+                        <input name="nick" type="text" class="login-text" required></input>
+                        <br />
+                        <br />
+                        <label for="nick" class="login-label">Data di nascita:</label>
                         <br />
                         <input name="nick" type="text" class="login-text" required></input>
                         <br />
@@ -172,35 +192,3 @@
     </body>
 
 </html>
-
-<!--
-
-
-
-    <form action="./api/index.php" method="POST">
-                        <input type="hidden" name="action" value="signup">
-                        <label for="nick" class="login-label">Nickname:</label>
-                        <br/>
-                        <input name="nick" type="text" class="login-text" required></input>
-                        <br/>
-                        <br/>
-                        <label for="email" class="login-label">Email:</label>
-                        <br/>
-                        <input name="email" type="email" class="login-text" required></input>
-                        <br/>
-                        <br/>
-                        <label for="password" class="login-label">Password:</label>
-                        <br/>
-                        <input name="password" type="password" class="login-text password-char" required></input>
-                        <br/>
-                        <p class="signup-error"></p>
-                        <br/>                        
-                        <br/>
-                        <br/>
-                        <button  class="onboard login-custom-button" type="submit">
-                            Sign-up
-                        </button>
-                        <br/>
-                        <br/>
-                    </form>
--->
