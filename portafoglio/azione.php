@@ -84,20 +84,37 @@
             ?>
             <hr class="star-dark mb-5 mx-auto">
 
-            <label for="intervallo">Intervallo dei dati nel grafico: </label>
-            <select class="form-control" id="range">
-                <option value="Giornaliero">Giornaliero</option>
-                <option value="Mensile">Mensile</option>
-                <option value="Annuale">Annuale</option>
-                <option value="5 anni">5 anni</option>
-                <option value="10 anni">10 anni</option>
-            </select>
-            <br />
-            <?php
-            $nome = $_POST['nome'];
-            $simbolo = $_POST['simbolo'];
-            echo '<input id="btn-grafico" type="button" class="btn btn-primary" onclick="grafico(`' . $simbolo . '`)" value="Aggiorna grafico ' . $nome . '" />';
-            ?>
+            <div id="head" class="row">
+                <div class="col">
+                    <label for="intervallo">Intervallo dei dati nel grafico: </label>
+                    <select class="form-control mx-auto" id="range">
+                        <option value="Giornaliero">Giornaliero</option>
+                        <option value="Mensile">Mensile</option>
+                        <option value="Annuale">Annuale</option>
+                        <option value="5 anni">5 anni</option>
+                        <option value="10 anni">10 anni</option>
+                    </select>
+                    <br />
+                    <?php
+                    $nome = $_POST['nome'];
+                    $simbolo = $_POST['simbolo'];
+                    echo '<input id="btn-grafico" type="button" class="btn btn-primary" onclick="grafico(`' . $simbolo . '`)" value="Aggiorna grafico ' . $nome . '" />';
+                    ?>
+                </div>
+                <div class="col">
+                    <br />
+                    <form action="./api/index.php" method="POST" class="mx-auto" id="form-acquisto">
+                        <input type="hidden" name="action" value="acquisto">
+                        <input type="hidden" name="simbolo" value=<?php $simbolo = $_POST['simbolo'];
+                                                                    echo $simbolo; ?>>
+                        <input type="number" id="numAzioni" name="numAzioni" placeholder="Numero di azioni" required>
+                        <br /><br />
+                        <button id="btn-acquista-azione" class="btn btn-primary" type="submit">
+                            Acquista azioni
+                        </button>
+                    </form>
+                </div>
+            </div>
             <br /><br />
             <div id="containerGrafico" data-intro="Grafico dell'azione" data-step="1">
                 <canvas id="myChart">

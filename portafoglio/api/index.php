@@ -73,6 +73,18 @@ switch ($_REQUEST["action"]) {
             header('Location: ../login.html?res=error&login=false');
         }
         break;
+    case 'acquisto':
+        echo $_REQUEST["simbolo"];
+        echo '<br>';
+        echo 'Numero di azioni:' . $_REQUEST["numAzioni"];
+        echo '<br>';
+        echo 'Prezzo:' . $_REQUEST["prezzo"];
+
+        if (isset($_SESSION)) {
+        } else {
+            header('Location: ../login.html?res=error&acquisto=false');
+        }
+        break;
     default:
         echo "errore request";
         break;
