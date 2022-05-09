@@ -106,7 +106,7 @@ function grafico(simbolo) {
 }
 
 function initHomeAzione() {
-    $('#more').hide();
+    $('#allMore').hide();
     $('#caricamento').show();
     const settings = {
         "async": false, //true
@@ -145,13 +145,13 @@ function initHomeAzione() {
                 </div>`);
             }
             else if (i > 15) {
-                if ((i % 15)==0) {
+                /* if ((i % 15)==0) {
                     k++;
                     $("#allMore").append(`<div class="row" id="more`+k+`" style="display: none;"></div>`);
                 }
                 var app = "more" + k;
-                var more = document.getElementById(app);
-                $(more).append(`<div class="col-md-6 col-lg-4">
+                var more = document.getElementById(app); */
+                $("#allMore").append(`<div class="col-md-6 col-lg-4">
             <a class="d-block mx-auto portfolio-item" data-toggle="modal" href="#portfolio-modal-`+ i + `">
                         <div class="d-flex portfolio-item-caption position-absolute h-100 w-100">
                             <div class="my-auto portfolio-item-caption-content w-100 text-center text-white">
@@ -165,12 +165,12 @@ function initHomeAzione() {
 
             if (i == 9) {
                 $('#titoloMore').append('<h3 class="text-uppercase text-center text-secondary">Tutti i titoli</h3>');
-                $('#showMore-div').append(`<div class="col-md-6 col-lg-4 float-left">
+                /* $('#showMore-div').append(`<div class="col-md-6 col-lg-4 float-left">
                     <input type="submit" value="Precedente" id="prec-btn" class="btn btn-primary">
                     </div>`);
                 $('#showMore-div').append(`<div class="col-md-6 col-lg-4 float-right">
                     <input type="submit" value="Successivo" id="succ-btn" class="btn btn-primary">
-                    </div>`);
+                    </div>`); */
                 $('#showMore-div').append(`<div class="col-md-6 col-lg-4 mx-auto">
                     <input type="submit" value="Mostra tutti" id="showMore-btn" class="btn btn-primary">
                     </div>`);
