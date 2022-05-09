@@ -20,14 +20,14 @@ $(document).ready(function () {
                     $('#errore').show();
                     break;
                 default:
+                    $('#errore').append(string);
+                    $('#errore').show();
                     break;
             }
-
-            $('#errore').append(string);
-            $('#errore').show();
             break;
     
         default:
             break;
     }
+    
 });

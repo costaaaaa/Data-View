@@ -2,40 +2,46 @@
 include('./incl.php');
 switch ($_REQUEST["action"]) {
     case 'signup':
-        try {
-            $username = mysqli_real_escape_string($conn, $_REQUEST['nick']);
-            $email = mysqli_real_escape_string($conn, $_REQUEST['email']);
-            //$email = $_REQUEST['email'];
-            //$username = $_REQUEST['nick'];
-            $psw = password_hash($_REQUEST['password'], PASSWORD_DEFAULT);
+        //try {
 
-            $query = "SELECT `email` FROM `users` WHERE `email`='$email'";
+        $username = mysqli_real_escape_string($conn, $_REQUEST['nick']);
+        $email = mysqli_real_escape_string($conn, $_REQUEST['email']);
+        $nome = mysqli_real_escape_string($conn, $_REQUEST['nome']);
+        $cognome = mysqli_real_escape_string($conn, $_REQUEST['cognome']);
+        $date = mysqli_real_escape_string($conn, $_REQUEST['date']);
+        $sesso = mysqli_real_escape_string($conn, $_REQUEST['sesso']);
+        //$email = $_REQUEST['email'];
+        //$username = $_REQUEST['nick'];
+        $psw = password_hash($_REQUEST['password'], PASSWORD_DEFAULT);
+
+        $query = "SELECT `email` FROM `users` WHERE `email`='$email'";
+        $res = mysqli_query($mysqli, $query);
+        if ($res == "") {
+            $query = "SELECT `username` FROM `users` WHERE `username`='$username'";
             $res = mysqli_query($mysqli, $query);
             if ($res == "") {
-                $query = "SELECT `username` FROM `users` WHERE `username`='$username'";
+                //$query = "INSERT INTO `users` (`username`, `email`, `psw`) VALUES ('$username', '$email', '$psw')";
+                $query = "INSERT INTO `users` (`username`, `email`, `psw`, `nome`, `cognome`, `sesso`, `dataNascita`) VALUES ('$username', '$email', '$psw', '$nome', '$cognome', '$sesso', '$date')";
                 $res = mysqli_query($mysqli, $query);
-                if ($res == "") {
-                    $query = "INSERT INTO `users` (`username`, `email`, `psw`) VALUES ('$username', '$email', '$psw')";
-                    $res = mysqli_query($mysqli, $query);
-                    session_start();
-                    $_SESSION['username'] = $username;
-                    $_SESSION['email'] = $email;
-                    echo "success signup";
-                    header('Location: ../index.html?res=success&login=true');
-                } else {
-                    echo "error signup";
-                    header('Location: ../signup.html?res="error"&error=username&login=false');
-                }
+                session_start();
+                $_SESSION['username'] = $username;
+                $_SESSION['email'] = $email;
+                echo "success signup";
+                header('Location: ../index.html?res=success&login=true');
             } else {
                 echo "error signup";
-                header('Location: ../signup.html?res=error&error=email&login=false');
+                header('Location: ../signup.html?res="error"&error=username&login=false');
             }
-            //echo "Inserito <br/>";
-            //echo $_SESSION['email'] . ', ' . $_SESSION['username'];
-        } catch (\Throwable $th) {
-            //echo $th;
-            //echo "errore";
+        } else {
+            echo "error signup";
+            header('Location: ../signup.html?res=error&error=email&login=false');
         }
+        //echo "Inserito <br/>";
+        //echo $_SESSION['email'] . ', ' . $_SESSION['username'];
+        //} catch (\Throwable $th) {
+        //echo $th;
+        //echo "errore";
+        //}
         //header('Location: ../index.html');
         break;
     case 'logout':

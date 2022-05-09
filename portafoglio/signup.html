@@ -89,16 +89,6 @@
                         <input name="nick" type="text" class="login-text" required></input>
                         <br />
                         <br />
-                        <label for="nick" class="login-label">Sesso:</label>
-                        <br />
-                        <input name="nick" type="text" class="login-text" required></input>
-                        <br />
-                        <br />
-                        <label for="nick" class="login-label">Data di nascita:</label>
-                        <br />
-                        <input name="nick" type="text" class="login-text" required></input>
-                        <br />
-                        <br />
                         <label for="email" class="login-label">Email:</label>
                         <br />
                         <input name="email" type="email" class="login-text" required></input>
@@ -107,6 +97,19 @@
                         <label for="password" class="login-label">Password:</label>
                         <br />
                         <input name="password" type="password" class="login-text password-char" required></input>
+                        <br />
+                        <br />
+                        <label for="sesso" class="login-label">Sesso:</label>
+                        <br />
+                        <input type="radio" id="M" name="sesso" value="M">
+                        <label for="M">M</label>
+                        <input type="radio" id="F" name="sesso" value="F">
+                        <label for="F">F</label>
+                        <br />
+                        <br />
+                        <label for="date" class="login-label">Data di nascita:</label>
+                        <br />
+                        <input name="date" type="date" id="date" max="" required></input>
                         <br />
                         <p class="signup-error"></p>
                         <br />
