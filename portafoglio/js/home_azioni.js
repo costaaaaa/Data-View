@@ -30,7 +30,6 @@ $(document).ready(function () {
             $('#errore').hide();
             break;
     }
-
     $("#showMore-btn").click(function () {
         if ($("#showMore-btn").val() == "Mostra tutti") {
             $("#showMore-btn").val("Nascondi");
@@ -55,5 +54,4 @@ $(document).ready(function () {
         });
     });
 
-    
 });

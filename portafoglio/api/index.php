@@ -88,6 +88,17 @@ switch ($_REQUEST["action"]) {
             header('Location: ../home_azioni.html?res=success&azione=acquisto');
         } else {
             header('Location: ../login.html?res=error&azione=acquisto');
+
+        echo $_REQUEST["simbolo"];
+        echo '<br>';
+        echo 'Numero di azioni:' . $_REQUEST["numAzioni"];
+        echo '<br>';
+        echo 'Prezzo:' . $_REQUEST["prezzo"];
+
+        if (isset($_SESSION)) {
+        } else {
+            header('Location: ../login.html?res=error&acquisto=false');
+
         }
         break;
     default:

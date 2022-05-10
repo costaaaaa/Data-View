@@ -3,6 +3,7 @@ $(document).ready(function () {
     var queryString = window.location.search;
     var urlParams = new URLSearchParams(queryString);
     var res = urlParams.get('res');
+    var 
     console.log(res);
 
     switch (res) {
