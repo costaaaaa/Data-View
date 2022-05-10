@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Creato il: Apr 24, 2022 alle 15:31
+-- Creato il: Mag 10, 2022 alle 15:08
 -- Versione del server: 5.7.34
 -- Versione PHP: 7.4.21
 
@@ -29,47 +29,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `buy` (
   `idBuy` int(11) NOT NULL,
-  `idEtf` int(11) NOT NULL,
+  `simbolo` varchar(10) NOT NULL,
   `quote` int(11) NOT NULL,
   `prezzo_acquisto` decimal(10,0) NOT NULL,
-  `idPortafoglio` int(11) NOT NULL,
-  `idUser` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `etf`
---
-
-CREATE TABLE `etf` (
-  `idEtf` int(11) NOT NULL,
-  `nome` varchar(50) NOT NULL,
-  `simbolo` varchar(10) NOT NULL,
-  `borsa` varchar(15) NOT NULL,
-  `costi` decimal(10,0) NOT NULL,
-  `data_lancio` date NOT NULL,
-  `dimensione` int(11) NOT NULL,
-  `valuta` varchar(5) NOT NULL,
-  `KIID` text NOT NULL,
-  `scheda_info` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dump dei dati per la tabella `etf`
---
-
-INSERT INTO `etf` (`idEtf`, `nome`, `simbolo`, `borsa`, `costi`, `data_lancio`, `dimensione`, `valuta`, `KIID`, `scheda_info`) VALUES
-(1, 'Ishares glocalismi clean energy UCITS ETF', 'INRG.MI', 'Borsa italiana', '1', '2007-07-06', 0, 'EUR', 'https://www.justetf.com/servlet/download?isin=IE00B1XNHC34&documentType=KID&country=IT&lang=it', 'https://www.justetf.com/servlet/download?isin=IE00B1XNHC34&documentType=MR&country=IT&lang=it');
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `portafogli`
---
-
-CREATE TABLE `portafogli` (
-  `idPortafoglio` int(11) NOT NULL,
+  `dataAcquisto` date NOT NULL,
   `idUser` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -87,15 +50,16 @@ CREATE TABLE `users` (
   `nome` varchar(30) NOT NULL,
   `cognome` varchar(30) NOT NULL,
   `sesso` char(1) NOT NULL,
-  `dataNascita` date DEFAULT NULL
+  `dataNascita` date DEFAULT NULL,
+  `monetaVirtuale` int(11) NOT NULL DEFAULT '50000'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `users`
 --
 
-INSERT INTO `users` (`idUser`, `username`, `email`, `psw`, `nome`, `cognome`, `sesso`, `dataNascita`) VALUES
-(1, 'Costa', 'costamagna551@gmail.com', '$2y$10$/37rfVIo.zcWqKtiqSKtJOYJYnk6ifNqGqBNbGAXkhwX637Tu7CrW', 'Andrea', 'Costamagna', 'M', '2003-12-31');
+INSERT INTO `users` (`idUser`, `username`, `email`, `psw`, `nome`, `cognome`, `sesso`, `dataNascita`, `monetaVirtuale`) VALUES
+(1, 'Costa', 'costamagna551@gmail.com', '$2y$10$/37rfVIo.zcWqKtiqSKtJOYJYnk6ifNqGqBNbGAXkhwX637Tu7CrW', 'Andrea', 'Costamagna', 'M', '2003-12-31', 50000);
 
 --
 -- Indici per le tabelle scaricate
@@ -106,21 +70,6 @@ INSERT INTO `users` (`idUser`, `username`, `email`, `psw`, `nome`, `cognome`, `s
 --
 ALTER TABLE `buy`
   ADD PRIMARY KEY (`idBuy`),
-  ADD KEY `idUser` (`idUser`),
-  ADD KEY `idEtf` (`idEtf`,`idPortafoglio`),
-  ADD KEY `idPortafoglio` (`idPortafoglio`);
-
---
--- Indici per le tabelle `etf`
---
-ALTER TABLE `etf`
-  ADD PRIMARY KEY (`idEtf`);
-
---
--- Indici per le tabelle `portafogli`
---
-ALTER TABLE `portafogli`
-  ADD PRIMARY KEY (`idPortafoglio`),
   ADD KEY `idUser` (`idUser`);
 
 --
@@ -132,18 +81,6 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT per le tabelle scaricate
 --
-
---
--- AUTO_INCREMENT per la tabella `etf`
---
-ALTER TABLE `etf`
-  MODIFY `idEtf` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT per la tabella `portafogli`
---
-ALTER TABLE `portafogli`
-  MODIFY `idPortafoglio` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `users`
@@ -159,15 +96,7 @@ ALTER TABLE `users`
 -- Limiti per la tabella `buy`
 --
 ALTER TABLE `buy`
-  ADD CONSTRAINT `buy_ibfk_1` FOREIGN KEY (`idEtf`) REFERENCES `etf` (`idEtf`),
-  ADD CONSTRAINT `buy_ibfk_2` FOREIGN KEY (`idPortafoglio`) REFERENCES `portafogli` (`idPortafoglio`),
   ADD CONSTRAINT `buy_ibfk_3` FOREIGN KEY (`idUser`) REFERENCES `users` (`idUser`);
-
---
--- Limiti per la tabella `portafogli`
---
-ALTER TABLE `portafogli`
-  ADD CONSTRAINT `portafogli_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `users` (`idUser`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
