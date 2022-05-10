@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:8889
--- Creato il: Mag 10, 2022 alle 15:08
--- Versione del server: 5.7.34
--- Versione PHP: 7.4.21
+-- Host: 127.0.0.1
+-- Creato il: Mag 10, 2022 alle 19:16
+-- Versione del server: 10.4.22-MariaDB
+-- Versione PHP: 8.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,6 +32,7 @@ CREATE TABLE `buy` (
   `simbolo` varchar(10) NOT NULL,
   `quote` int(11) NOT NULL,
   `prezzo_acquisto` decimal(10,0) NOT NULL,
+  `totale` int(11) NOT NULL,
   `dataAcquisto` date NOT NULL,
   `idUser` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -51,7 +52,7 @@ CREATE TABLE `users` (
   `cognome` varchar(30) NOT NULL,
   `sesso` char(1) NOT NULL,
   `dataNascita` date DEFAULT NULL,
-  `monetaVirtuale` int(11) NOT NULL DEFAULT '50000'
+  `monetaVirtuale` int(11) NOT NULL DEFAULT 50000
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -59,7 +60,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`idUser`, `username`, `email`, `psw`, `nome`, `cognome`, `sesso`, `dataNascita`, `monetaVirtuale`) VALUES
-(1, 'Costa', 'costamagna551@gmail.com', '$2y$10$/37rfVIo.zcWqKtiqSKtJOYJYnk6ifNqGqBNbGAXkhwX637Tu7CrW', 'Andrea', 'Costamagna', 'M', '2003-12-31', 50000);
+(1, 'Costa', 'costamagna551@gmail.com', '$2y$10$/37rfVIo.zcWqKtiqSKtJOYJYnk6ifNqGqBNbGAXkhwX637Tu7CrW', 'Andrea', 'Costamagna', 'M', '2003-12-31', 48926);
 
 --
 -- Indici per le tabelle scaricate

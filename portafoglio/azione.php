@@ -42,24 +42,34 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item mx-0 mx-lg-1" role="presentation">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./index.html">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./index.php">
                             Home
                         </a>
                     </li>
                     <li class="nav-item mx-0 mx-lg-1" role="presentation">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./home_azioni.html">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./home_azioni.php">
                             Azioni
                         </a>
                     </li>
-                    <li class="nav-item mx-0 mx-lg-1" role="presentation">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./login.html">
-                            Log-in
-                        </a>
-                    </li>
-                    <li class="nav-item mx-0 mx-lg-1" role="presentation">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./signup.html">
-                            Sign-up
-                        </a>
+                    <?php session_start(); if(isset($_SESSION['username'])){
+                            echo '<li class="nav-item mx-0 mx-lg-1" role="presentation" id="linkAccount">
+                            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./account.php">
+                                Account
+                            </a>
+                        </li>';
+                        }else{
+                            
+                        echo '<li class="nav-item mx-0 mx-lg-1" role="presentation">
+                            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./login.html">
+                                Log-in
+                            </a>
+                        </li>
+                        <li class="nav-item mx-0 mx-lg-1" role="presentation">
+                            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./signup.html">
+                                Sign-up
+                            </a>
+                        </li>';
+                        } ?>
                     </li>
 
                     <!-- 'tour' della pagina-->

@@ -14,20 +14,27 @@ $(document).ready(function () {
             var azione = urlParams.get('azione');
             if (azione == "acquisto") {
                 alert("Devi effettuare il login");
+                console.log("Login da effettuare");
             }
-            console.log("Errore");
+            console.log("Error");
             break;
         case 'success':
             var queryString = window.location.search;
             var urlParams = new URLSearchParams(queryString);
             var azione = urlParams.get('azione');
-            if (azione == "acquisto") {
-                alert("Acquisto effettuato con successo!");
-                /* link per alert bootstrap da integrare: https://getbootstrap.com/docs/4.0/components/modal/ */
+
+            console.log("Success");
+
+            switch(azione){
+                case "acquisto":
+                    alert("Acquisto effettuato con successo!");
+                    /* link per alert bootstrap da integrare: https://getbootstrap.com/docs/4.0/components/modal/ */
+                    console.log("Acquisto effettuato");
+                break;
             }
             break;
         default:
-            $('#errore').hide();
+            console.log("Nessun messaggio da parte dell'API");
             break;
     }
     $("#showMore-btn").click(function () {

@@ -41,7 +41,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="nav navbar-nav ml-auto">
                         <li class="nav-item mx-0 mx-lg-1" role="presentation">
-                            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./index.html">
+                            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./index.php">
                                 Home
                             </a>
                         </li>
@@ -50,7 +50,18 @@
                                 Titoli
                             </a>
                         </li>
-                        <li class="nav-item mx-0 mx-lg-1" role="presentation">
+
+
+                        <?php session_start();
+                             if(isset($_SESSION['username']) && $_SESSION['username'] != ""){
+                            
+                        echo '<li class="nav-item mx-0 mx-lg-1" role="presentation" id="linkAccount">
+                            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./account.php">
+                                Account
+                            </a>
+                        </li>';
+                        }else{
+                            echo '<li class="nav-item mx-0 mx-lg-1" role="presentation">
                             <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./login.html">
                                 Log-in
                             </a>
@@ -59,7 +70,9 @@
                             <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./signup.html">
                                 Sign-up
                             </a>
-                        </li>
+                        </li>';
+                        } ?>
+                        
 
                         <!-- 'tour' della pagina-->
                         <li class="nav-item mx-0 mx-lg-1" role="presentation"><a
@@ -152,7 +165,26 @@
         <script src="../assets/js/freelancer.js"></script>
         <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
         
-        
+  
+        <!-- Modal -->
+        <div class="modal fade" id="modal-acquisto-success" tabindex="-1" role="dialog" aria-labelledby="modal-acquisto-success-title" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <div class="modal-body">
+          Acquisto effettuato con successo!
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Esci</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
     </body>
 

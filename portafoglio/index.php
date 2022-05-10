@@ -42,21 +42,30 @@
                                 Strumenti
                             </a>
                         </li>
-                        <li class="nav-item mx-0 mx-lg-1" role="presentation" id="linkLogin">
-                            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./login.html">
-                                Log-in
-                            </a>
-                        </li>
-                        <li class="nav-item mx-0 mx-lg-1" role="presentation" id="linkSignup">
-                            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./signup.html">
-                                Sign-up
-                            </a>
-                        </li>
-                        <li class="nav-item mx-0 mx-lg-1" role="presentation" id="linkAccount">
-                            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./account.html">
-                                Account
-                            </a>
-                        </li>
+
+
+                        <?php session_start(); 
+                            if(isset($_SESSION['username']) && $_SESSION['username'] != ""){
+                            
+                            echo '<li class="nav-item mx-0 mx-lg-1" role="presentation" id="linkAccount">
+                                <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./account.php">
+                                    Account
+                                </a>
+                            </li>';
+                            }else{
+                                echo '<li class="nav-item mx-0 mx-lg-1" role="presentation">
+                                <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./login.html">
+                                    Log-in
+                                </a>
+                            </li>
+                            <li class="nav-item mx-0 mx-lg-1" role="presentation">
+                                <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./signup.html">
+                                    Sign-up
+                                </a>
+                            </li>';
+                            } ?>
+
+
                         <!-- 'tour' della pagina-->
                         <li class="nav-item mx-0 mx-lg-1" role="presentation"><a
                                 class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
@@ -88,7 +97,7 @@
                 <hr class="star-dark mb-5 mx-auto">
                 <div class="row">
                     <div class="col-md-6 col-lg-4">
-                        <a class="d-block mx-auto portfolio-item" data-toggle="modal" href="./home_azioni.html" id="linkAzioni">
+                        <a class="d-block mx-auto portfolio-item" data-toggle="modal" href="./home_azioni.php" id="linkAzioni">
                             <div class="d-flex portfolio-item-caption position-absolute h-100 w-100">
                                 <div class="my-auto portfolio-item-caption-content w-100 text-center text-white">
                                     <i class="fa fa-search-plus fa-3x"></i>

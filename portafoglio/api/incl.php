@@ -14,16 +14,9 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
     'db_name' => 'my_andreacostamagna',
     'db_user' => 'root',
     'db_password' => '',
-]; */
-
-//MAMP
-/*
-$config = [
-    'db_host' => 'localhost',
-    'db_name' => 'portafoglio',
-    'db_user' => 'root',
-    'db_password' => 'root',
 ];
+
+
 
 $db_config = $config['db_engine'] . ":host=" . $config['db_host'] . ";dbname=" . $config['db_name'];
 $conn = mysqli_connect($config['db_host'], $config['user'], $config['password'], $config['name']);
@@ -41,14 +34,20 @@ try {
 }
 */
 
-
-
+//MAMP
+/*
 $db_host = 'localhost';
 $db_user = 'root';
 $db_password = 'root';
 $db_db = 'portafoglio';
-
+*/
 //$conn = mysqli_connect($db_host, $db_user, $db_password, $db_db);
+
+//XAMP
+$db_host = 'localhost';
+$db_user = 'root';
+$db_password = '';
+$db_db = 'portafoglio';
 
 $mysqli = @new mysqli(
     $db_host,

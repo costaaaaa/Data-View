@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('#linkAccount').hide();
+    /*$('#linkAccount').hide();
 
     var queryString = window.location.search;
     var urlParams = new URLSearchParams(queryString);
@@ -31,5 +31,5 @@ $(document).ready(function () {
                 $('#linkSignup').show();
                 $('#linkAccount').hide();
             break;
-    }
+    }*/
 });
