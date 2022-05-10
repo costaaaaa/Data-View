@@ -74,6 +74,21 @@ switch ($_REQUEST["action"]) {
         }
         break;
     case 'acquisto':
+        /* echo $_REQUEST["simbolo"];
+        echo '<br>';
+        echo 'Numero di azioni:' . $_REQUEST["numAzioni"];
+        echo '<br>';
+        echo 'Prezzo:' . $_REQUEST["prezzo"]; */
+
+        if (isset($_SESSION['username'])) {
+            $query = "SELECT `idUser` FROM `users` WHERE `email`='" . $_SESSION['email'] . "'";
+            $resId = mysqli_query($mysqli, $query);
+            $query = "INSERT INTO `buy` (`simbolo`, `quote`, `prezzo_acquisto`, `dataAcquisto`, `idUser`) VALUES ('" . $_REQUEST["simbolo"] . "', '" . $_REQUEST["numAzioni"] . "', '" . $_REQUEST["prezzo"] . "', '" . date("d/m/Y") . "', '$resId'";
+            $res = mysqli_query($mysqli, $query);
+            header('Location: ../home_azioni.html?res=success&azione=acquisto');
+        } else {
+            header('Location: ../login.html?res=error&azione=acquisto');
+
         echo $_REQUEST["simbolo"];
         echo '<br>';
         echo 'Numero di azioni:' . $_REQUEST["numAzioni"];
@@ -83,6 +98,7 @@ switch ($_REQUEST["action"]) {
         if (isset($_SESSION)) {
         } else {
             header('Location: ../login.html?res=error&acquisto=false');
+
         }
         break;
     default:
