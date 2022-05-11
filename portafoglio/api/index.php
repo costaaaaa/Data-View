@@ -79,43 +79,34 @@ switch ($_REQUEST["action"]) {
         echo 'Prezzo:' . $_REQUEST["prezzo"]; */
 
         if (isset($_SESSION['username'])) {
-            $query = "SELECT `idUser` FROM `users` WHERE `email`='" . $_SESSION['email'] . "'";
-            $resId = mysqli_query($mysqli, $query);
-            $dat = mysqli_fetch_assoc($resId);
+            //variabili dell'acquisto
             $nAzioni = $_REQUEST['numAzioni'];
             $prezzo = $_REQUEST['prezzo'];
             $totale = $prezzo * $nAzioni;
             $simbolo = $_REQUEST['simbolo'];
             $today = date("Y/m/d");
+            $email = $_SESSION['email'];
 
             //ricavo i soldi dell'utente
             $query = "SELECT `monetaVirtuale` FROM `users` WHERE `email`='" . $_SESSION['email'] . "'";
             $res = mysqli_query($mysqli, $query);
             $dat = mysqli_fetch_assoc($res);
 
-            if($dat >= $totale){
+            if ($dat >= $totale) {
                 //inserisco l'acquisto nel database
-                $query = "INSERT INTO `buy` (`simbolo`, `quote`, `prezzo_acquisto`, `totale`, `dataAcquisto`, `idUser`) VALUES ('$simbolo', '$nAzioni', '$prezzo', '$totale', '$today', '$dat'";
+                $query = "INSERT INTO `buy` (`simbolo`, `quote`, `prezzo_acquisto`, `totale`, `dataAcquisto`, `email`) VALUES ('" . $simbolo . "', '" . $nAzioni . "', '" . $prezzo . "', '" . $totale . "', '" . $today . "', '" . $email . "')";
                 $res = mysqli_query($mysqli, $query);
 
-                $rimanente = $dat['monetaVirtuale'] - $totale;
                 //aggiorno soldi utente
-                $email = $_SESSION['email'];
+                $rimanente = $dat['monetaVirtuale'] - $totale;
                 $query = "UPDATE `users` SET `monetaVirtuale`='$rimanente' WHERE `email`='$email'";
                 $resId = mysqli_query($mysqli, $query);
             }
-            
-
-//UPDATE `users` SET `monetaVirtuale`='11' WHERE `idUser`='1'
+            $_SESSION['acquisto'] = "success";
             header('Location: ../home_azioni.php?res=success&azione=acquisto');
         } else {
             header('Location: ../login.html?res=error&azione=acquisto');
         }
-        /*echo $_REQUEST["simbolo"];
-        echo '<br>';
-        echo 'Numero di azioni:' . $_REQUEST["numAzioni"];
-        echo '<br>';
-        echo 'Prezzo:' . $_REQUEST["prezzo"];*/
         break;
     default:
         echo "errore request";

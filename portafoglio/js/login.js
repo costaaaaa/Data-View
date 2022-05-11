@@ -7,6 +7,8 @@ $(document).ready(function () {
 
     switch (res) {
         case 'error':
+
+            
             $('#errore').append('Email o password errati');
             $('#errore').show();
             console.log("Errore");

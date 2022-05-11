@@ -561,7 +561,7 @@ $(document).ready(function () {
     });
 
     $('#linkAzioni').click(function (e) {
-        window.location = './home_azioni.html';
+        window.location = './home_azioni.php';
     });
     $('#linkETF').click(function (e) {
         window.location = './home_ETF.html';

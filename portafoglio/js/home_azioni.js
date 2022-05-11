@@ -27,7 +27,8 @@ $(document).ready(function () {
 
             switch(azione){
                 case "acquisto":
-                    alert("Acquisto effettuato con successo!");
+                    //alert("Acquisto effettuato con successo!");
+                    $('#modal-acquisto-success').modal("show")
                     /* link per alert bootstrap da integrare: https://getbootstrap.com/docs/4.0/components/modal/ */
                     console.log("Acquisto effettuato");
                 break;
