@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Creato il: Mag 10, 2022 alle 19:16
--- Versione del server: 10.4.22-MariaDB
--- Versione PHP: 8.0.13
+-- Host: localhost:8889
+-- Creato il: Mag 11, 2022 alle 10:18
+-- Versione del server: 5.7.34
+-- Versione PHP: 7.4.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,10 +32,19 @@ CREATE TABLE `buy` (
   `simbolo` varchar(10) NOT NULL,
   `quote` int(11) NOT NULL,
   `prezzo_acquisto` decimal(10,0) NOT NULL,
-  `totale` int(11) NOT NULL,
-  `dataAcquisto` date NOT NULL,
-  `idUser` int(11) NOT NULL
+  `totale` decimal(10,0) NOT NULL,
+  `dataAcquisto` varchar(10) NOT NULL,
+  `email` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dump dei dati per la tabella `buy`
+--
+
+INSERT INTO `buy` (`idBuy`, `simbolo`, `quote`, `prezzo_acquisto`, `totale`, `dataAcquisto`, `email`) VALUES
+(1, 'MSFT', 5, '270', '1348', '2022/05/11', 'costamagna551@gmail.com'),
+(2, 'MSFT', 1, '270', '270', '2022/05/11', 'costamagna551@gmail.com'),
+(3, 'MSFT', 9, '270', '2426', '2022/05/11', 'costamagna551@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -52,7 +61,7 @@ CREATE TABLE `users` (
   `cognome` varchar(30) NOT NULL,
   `sesso` char(1) NOT NULL,
   `dataNascita` date DEFAULT NULL,
-  `monetaVirtuale` int(11) NOT NULL DEFAULT 50000
+  `monetaVirtuale` int(11) NOT NULL DEFAULT '50000'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -60,7 +69,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`idUser`, `username`, `email`, `psw`, `nome`, `cognome`, `sesso`, `dataNascita`, `monetaVirtuale`) VALUES
-(1, 'Costa', 'costamagna551@gmail.com', '$2y$10$/37rfVIo.zcWqKtiqSKtJOYJYnk6ifNqGqBNbGAXkhwX637Tu7CrW', 'Andrea', 'Costamagna', 'M', '2003-12-31', 48926);
+(1, 'Costa', 'costamagna551@gmail.com', '$2y$10$/37rfVIo.zcWqKtiqSKtJOYJYnk6ifNqGqBNbGAXkhwX637Tu7CrW', 'Andrea', 'Costamagna', 'M', '2003-12-31', 45958);
 
 --
 -- Indici per le tabelle scaricate
@@ -70,8 +79,7 @@ INSERT INTO `users` (`idUser`, `username`, `email`, `psw`, `nome`, `cognome`, `s
 -- Indici per le tabelle `buy`
 --
 ALTER TABLE `buy`
-  ADD PRIMARY KEY (`idBuy`),
-  ADD KEY `idUser` (`idUser`);
+  ADD PRIMARY KEY (`idBuy`);
 
 --
 -- Indici per le tabelle `users`
@@ -84,20 +92,16 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT per la tabella `buy`
+--
+ALTER TABLE `buy`
+  MODIFY `idBuy` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT per la tabella `users`
 --
 ALTER TABLE `users`
   MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- Limiti per le tabelle scaricate
---
-
---
--- Limiti per la tabella `buy`
---
-ALTER TABLE `buy`
-  ADD CONSTRAINT `buy_ibfk_3` FOREIGN KEY (`idUser`) REFERENCES `users` (`idUser`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

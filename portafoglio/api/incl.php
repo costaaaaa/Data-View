@@ -35,19 +35,21 @@ try {
 */
 
 //MAMP
-/*
+
 $db_host = 'localhost';
 $db_user = 'root';
 $db_password = 'root';
 $db_db = 'portafoglio';
-*/
+
 //$conn = mysqli_connect($db_host, $db_user, $db_password, $db_db);
 
 //XAMP
+/*
 $db_host = 'localhost';
 $db_user = 'root';
 $db_password = '';
 $db_db = 'portafoglio';
+*/
 
 $mysqli = @new mysqli(
     $db_host,
@@ -57,7 +59,7 @@ $mysqli = @new mysqli(
 );
 
 if ($mysqli->connect_error) {
-    echo 'Errno: ' . $mysqli->connect_errno;
+    echo 'Error: ' . $mysqli->connect_errno;
     echo '<br>';
     echo 'Error: ' . $mysqli->connect_error;
     exit();
