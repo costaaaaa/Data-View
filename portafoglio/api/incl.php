@@ -35,19 +35,21 @@ try {
 */
 
 //MAMP
-/*
+
 $db_host = 'localhost';
 $db_user = 'root';
 $db_password = 'root';
 $db_db = 'portafoglio';
-*/
+
 //$conn = mysqli_connect($db_host, $db_user, $db_password, $db_db);
 
 //XAMP
+/*
 $db_host = 'localhost';
 $db_user = 'root';
 $db_password = '';
 $db_db = 'portafoglio';
+*/
 
 $mysqli = @new mysqli(
     $db_host,
