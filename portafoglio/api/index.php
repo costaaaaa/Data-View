@@ -93,9 +93,26 @@ switch ($_REQUEST["action"]) {
             $dat = mysqli_fetch_assoc($res);
 
             if ($dat >= $totale) {
-                //inserisco l'acquisto nel database
-                $query = "INSERT INTO `buy` (`simbolo`, `quote`, `prezzo_acquisto`, `totale`, `dataAcquisto`, `email`) VALUES ('" . $simbolo . "', '" . $nAzioni . "', '" . $prezzo . "', '" . $totale . "', '" . $today . "', '" . $email . "')";
+                //inserisco l'acquisto nella tabella delle transazioni
+                $query = "INSERT INTO `buy` (`simbolo`, `quote`, `prezzo`, `totale`, `dataTransazione`, `email`) VALUES ('" . $simbolo . "', '" . $nAzioni . "', '" . $prezzo . "', '" . $totale . "', '" . $today . "', 'A', '" . $email . "')";
                 $res = mysqli_query($mysqli, $query);
+
+                //seleziono azioni possedute dall'utente per il relativo simbolo dell'azione
+                $query = "SELECT `quote`, `prezzo_medio`, `totale` FROM `possedute` WHERE `email` = '$email' AND `simbolo`='$simbolo'";
+                $res = mysqli_query($mysqli, $query);
+                $possedute = mysqli_fetch_assoc($res);
+
+                if ($res == "") {
+                    //inserisco l'acquisto nella tabella con le azioni possedute dagli utenti
+                    $query = "INSERT INTO `possedute` (`simbolo`, `quote`, `prezzo_medio`, `totale`, `email`) VALUES ('" . $simbolo . "', '" . $nAzioni . "', '" . $prezzo . "', '" . $totale . "', '" . $email . "')";
+                    $res = mysqli_query($mysqli, $query);
+                } else {
+                    $prezzoMedio = ($dat['prezzo_medio'] + $prezzo) / 2;
+                    $numeroAzioniTotali = $possedute['quote'] + $nAzioni;
+                    $totalePortafoglio = $dat['totale'] + $totale;
+                    $query = "UPDATE `possedute` SET `quote`='$numeroAzioniTotali', `prezzo_medio`='$prezzoMedio', `totale`='$totalePortafoglio' WHERE `email`='$email' AND `simbolo`='$simbolo'";
+                    $res = mysqli_query($mysqli, $query);
+                }
 
                 //aggiorno soldi utente
                 $rimanente = $dat['monetaVirtuale'] - $totale;
@@ -106,6 +123,25 @@ switch ($_REQUEST["action"]) {
             header('Location: ../home_azioni.php?res=success&azione=acquisto');
         } else {
             header('Location: ../login.html?res=error&azione=acquisto');
+        }
+        break;
+    case 'vendita':
+        if (isset($_SESSION['username'])) {
+            $nAzioni = $_REQUEST['numAzioni'];
+            $prezzo = $_REQUEST['prezzo'];
+            $totale = $prezzo * $nAzioni;
+            $simbolo = $_REQUEST['simbolo'];
+            $today = date("Y/m/d");
+            $email = $_SESSION['email'];
+
+            //ricavo i soldi dell'utente
+            $query = "SELECT `monetaVirtuale` FROM `users` WHERE `email`='" . $_SESSION['email'] . "'";
+            $res = mysqli_query($mysqli, $query);
+            $dat = mysqli_fetch_assoc($res);
+
+            //inserisco la vendita nella tabella delle transazioni
+            $query = "INSERT INTO `buy` (`simbolo`, `quote`, `prezzo`, `totale`, `dataTransazione`, `tipo`, `email`) VALUES ('" . $simbolo . "', '" . $nAzioni . "', '" . $prezzo . "', '" . $totale . "', '" . $today . "', 'V', '" . $email . "')";
+            $res = mysqli_query($mysqli, $query);
         }
         break;
     default:
