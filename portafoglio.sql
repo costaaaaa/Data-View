@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Creato il: Mag 11, 2022 alle 10:18
+-- Creato il: Mag 12, 2022 alle 08:45
 -- Versione del server: 5.7.34
 -- Versione PHP: 7.4.21
 
@@ -31,9 +31,10 @@ CREATE TABLE `buy` (
   `idBuy` int(11) NOT NULL,
   `simbolo` varchar(10) NOT NULL,
   `quote` int(11) NOT NULL,
-  `prezzo_acquisto` decimal(10,0) NOT NULL,
+  `prezzo` decimal(10,0) NOT NULL,
   `totale` decimal(10,0) NOT NULL,
-  `dataAcquisto` varchar(10) NOT NULL,
+  `dataTransazione` varchar(10) NOT NULL,
+  `tipo` char(1) NOT NULL,
   `email` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -41,10 +42,32 @@ CREATE TABLE `buy` (
 -- Dump dei dati per la tabella `buy`
 --
 
-INSERT INTO `buy` (`idBuy`, `simbolo`, `quote`, `prezzo_acquisto`, `totale`, `dataAcquisto`, `email`) VALUES
-(1, 'MSFT', 5, '270', '1348', '2022/05/11', 'costamagna551@gmail.com'),
-(2, 'MSFT', 1, '270', '270', '2022/05/11', 'costamagna551@gmail.com'),
-(3, 'MSFT', 9, '270', '2426', '2022/05/11', 'costamagna551@gmail.com');
+INSERT INTO `buy` (`idBuy`, `simbolo`, `quote`, `prezzo`, `totale`, `dataTransazione`, `tipo`, `email`) VALUES
+(1, 'MSFT', 5, '270', '1348', '2022/05/11', 'A', 'costamagna551@gmail.com'),
+(2, 'MSFT', 1, '270', '270', '2022/05/11', 'A', 'costamagna551@gmail.com'),
+(3, 'MSFT', 9, '270', '2426', '2022/05/11', 'A', 'costamagna551@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `possedute`
+--
+
+CREATE TABLE `possedute` (
+  `idPossedimento` int(11) NOT NULL,
+  `simbolo` varchar(10) NOT NULL,
+  `quote` int(11) NOT NULL,
+  `prezzo_medio` decimal(10,0) NOT NULL,
+  `totale` int(11) NOT NULL,
+  `email` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dump dei dati per la tabella `possedute`
+--
+
+INSERT INTO `possedute` (`idPossedimento`, `simbolo`, `quote`, `prezzo_medio`, `totale`, `email`) VALUES
+(1, 'MSFT', 15, '270', 4050, 'costamagna551@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -82,6 +105,12 @@ ALTER TABLE `buy`
   ADD PRIMARY KEY (`idBuy`);
 
 --
+-- Indici per le tabelle `possedute`
+--
+ALTER TABLE `possedute`
+  ADD PRIMARY KEY (`idPossedimento`);
+
+--
 -- Indici per le tabelle `users`
 --
 ALTER TABLE `users`
@@ -96,6 +125,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `buy`
   MODIFY `idBuy` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT per la tabella `possedute`
+--
+ALTER TABLE `possedute`
+  MODIFY `idPossedimento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT per la tabella `users`
