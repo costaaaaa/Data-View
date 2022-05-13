@@ -7,13 +7,28 @@ $(document).ready(function () {
 
     switch (res) {
         case 'error':
-
-            
-            $('#errore').append('Email o password errati');
-            $('#errore').show();
-            console.log("Errore");
+            var azione = urlParams.get('azione');
+            switch (azione) {
+                case "acquisto":
+                    $('#errore').append('Richiesto log-in per effettuare acquisti');
+                    $('#errore').show();
+                    console.log("Richiesto login per acquisti");
+                    break;
+                case "login":
+                    $('#errore').append('Email o password errati');
+                    $('#errore').show();
+                    console.log("Email o password errati");
+                    break;
+                case "vendita":
+                    $('#errore').append('Richiesto log-in per effettuare vendite');
+                    $('#errore').show();
+                    console.log("Richiesto login per vendere");
+                    break;
+                default:
+                    $('#errore').hide();
+                    break;
+            }
             break;
-    
         default:
             $('#errore').hide();
             break;

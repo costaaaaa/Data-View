@@ -1,47 +1,140 @@
 <!DOCTYPE html>
 <html lang="it">
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        <title>Log-in - Data-View</title>
-        <meta name="description" content="Log-in - Data-View">
-        <link rel="icon" href="./img/logo.ico">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>
+        <?php
+        session_start();
+        $account = $_SESSION['username'];
+        echo $account;
+        ?> - Data-View
+    </title>
+    <meta name="description" content="Data-View di Costamagna Andrea">
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic">
+    <link rel="stylesheet" href="../assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/css/untitled-1.css">
+    <link rel="stylesheet" href="../assets/css/untitled.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/intro.js@2.9.3/intro.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/intro.js@2.9.3/introjs.css" rel="stylesheet" />
 
-        <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic">
-        <link rel="stylesheet" href="../assets/fonts/font-awesome.min.css">
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.js"></script>
+    <script src="./js/index.js"></script>
 
-        <link rel="stylesheet" href="../assets/css/untitled-1.css">
-        <link rel="stylesheet" href="../assets/css/untitled.css">
-        <link rel="stylesheet" href="./css/index.css">
-        <link rel="stylesheet" href="./css/signup.css">
+</head>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/intro.js@2.9.3/intro.min.js"></script>
-        <link href="https://cdn.jsdelivr.net/npm/intro.js@2.9.3/introjs.css" rel="stylesheet" />
+<body id="page-top">
+    <nav class=" navbar navbar-light navbar-expand-lg fixed-top bg-secondary text-uppercase" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">
+                Data-View
+            </a>
+            <button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./index.php">
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./home_azioni.php">
+                            Azioni
+                        </a>
+                    </li>
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./home_ETF.php">
+                            ETF
+                        </a>
+                    </li>
 
-        <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
-        <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script> -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.js"></script>
-        <script type="text/javascript" src="../assets/js/freelancer.js"></script>
-    </head>
 
-    <body id="page-top">
-    <form action="./api/index.php" method="POST" class="mx-auto">
-                        <input type="hidden" name="action" value="logout">
-                        <button class="onboard login-custom-button btn btn-primary" type="submit">
-                            Log-out
-                        </button>
-                        <br />
-                        <br />
-                    </form>
+                    <!-- 'tour' della pagina-->
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" onclick="introJs().start()">START TOUR</a></li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li class="nav-item" role="presentation"></li>
+                    <li class="nav-item" role="presentation"></li>
+                    <li class="nav-item" role="presentation"></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-        <script src="../assets/js/jquery.min.js"></script>
-        <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-        <script src="../assets/js/freelancer.js"></script>
-    </body>
+    <!-- section centrale con i vari collegamenti -->
+    <section id="portfolio" class="portfolio">
+        <br /><br />
+        <div class="container">
+            <?php
+            $account = $_SESSION['username'];
+            echo '<h2 class="text-uppercase text-center text-secondary">Bentornato ' . $account . '</h2>'
+            ?>
+            <hr class="star-dark mb-5 mx-auto">
+
+            <div id="head" class="row">
+
+
+
+
+
+                <form action="./api/index.php" method="POST" class="mx-auto">
+                    <input type="hidden" name="action" value="logout">
+                    <button class="onboard login-custom-button btn btn-primary" type="submit">
+                        Log-out
+                    </button>
+                    <br />
+                    <br />
+                </form>
+
+            </div>
+            <br /><br />
+            <div id="spazioDiv"></div>
+        </div>
+    </section>
+
+    <br /><br /><br />
+
+    <footer class="footer text-center fondo fixed-bottom">
+        <div class="container">
+            <div id="location">
+                <h4 class="text-uppercase mb-4">Location</h4>
+                <p>Via chiari 48</p>
+                <p>
+                    Narzole (CN) 12068
+                </p>
+            </div>
+            <div id="social" data-intro="Social networks of dev" data-step="3">
+                <h4 class="text-uppercase">Around the Web</h4>
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://github.com/costaaaaa" target="_blank">
+                    <i class="fa fa-github"></i>
+                </a>
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://www.instagram.com/costamagna.andrea/" target="_blank">
+                    <i class="fa fa-instagram fa-fw"></i>
+                </a>
+            </div>
+            <br /><br />
+        </div>
+    </footer>
+    <div class="copyright py-4 text-center text-white fondo fixed-bottom">
+        <div class="container"><small>Copyright ©&nbsp;Data-View 2022</small></div>
+    </div>
+
+
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="../assets/js/freelancer.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+
+
+</body>
 
 </html>
