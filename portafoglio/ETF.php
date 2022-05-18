@@ -10,6 +10,7 @@
         echo $simbolo;
         ?> - Data-View
     </title>
+    <link rel="icon" href="./img/logo.ico">
     <meta name="description" content="Portfolio di Costamagna Andrea">
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
