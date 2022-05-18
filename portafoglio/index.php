@@ -46,9 +46,16 @@
                     <?php session_start();
                     if (isset($_SESSION['username']) && $_SESSION['username'] != "") {
 
-                        echo '<li class="nav-item mx-0 mx-lg-1" role="presentation" id="linkAccount">
+                        /* echo '<li class="nav-item mx-0 mx-lg-1" role="presentation" id="linkAccount">
                                 <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./account.php">
                                     Account
+                                </a>
+                            </li>'; */
+                        echo '<li class="nav-item mx-0 mx-lg-1" role="presentation" id="linkAccount">
+                                <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./account.php">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                    </svg> Account
                                 </a>
                             </li>';
                     } else {
@@ -105,7 +112,7 @@
                 </div>
 
                 <div class="col-md-6 col-lg-4">
-                    <a class="d-block mx-auto portfolio-item" data-toggle="modal" href="./home_ETF.html" id="linkETF">
+                    <a class="d-block mx-auto portfolio-item" data-toggle="modal" href="./home_ETF.php" id="linkETF">
                         <div class="d-flex portfolio-item-caption position-absolute h-100 w-100">
                             <div class="my-auto portfolio-item-caption-content w-100 text-center text-white">
                                 <i class="fa fa-search-plus fa-3x"></i>
