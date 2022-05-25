@@ -473,6 +473,7 @@ function initETF(simbolo) {
             console.log('Dati ETF giornalieri')
             console.log(obj);
             $('btn-grafico').val('Aggiorna grafico' + obj.companyName);
+            let imgValuta = "";
 
             var head = document.getElementsByTagName("head");
             var sc1 = document.createElement("link");
@@ -481,6 +482,26 @@ function initETF(simbolo) {
             //head.appendChild(sc1);
             $('head').append(sc1);
 
+            switch (obj.currency) {
+                case "USD":
+                    imgValuta = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-currency-dollar" viewBox="0 0 16 16">
+                                    <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"/>
+                                </svg>`;
+                    break;
+                case "EUR":
+                    imgValuta = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-currency-euro" viewBox="0 0 16 16">
+                                    <path d="M4 9.42h1.063C5.4 12.323 7.317 14 10.34 14c.622 0 1.167-.068 1.659-.185v-1.3c-.484.119-1.045.17-1.659.17-2.1 0-3.455-1.198-3.775-3.264h4.017v-.928H6.497v-.936c0-.11 0-.219.008-.329h4.078v-.927H6.618c.388-1.898 1.719-2.985 3.723-2.985.614 0 1.175.05 1.659.177V2.194A6.617 6.617 0 0 0 10.341 2c-2.928 0-4.82 1.569-5.244 4.3H4v.928h1.01v1.265H4v.928z"/>
+                                </svg>`;
+                    break;
+                case "GBP":
+                    imgValuta = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-currency-pound" viewBox="0 0 16 16">
+                                    <path d="M4 8.585h1.969c.115.465.186.939.186 1.43 0 1.385-.736 2.496-2.075 2.771V14H12v-1.24H6.492v-.129c.825-.525 1.135-1.446 1.135-2.694 0-.465-.07-.913-.168-1.352h3.29v-.972H7.22c-.186-.723-.372-1.455-.372-2.247 0-1.274 1.047-2.066 2.58-2.066a5.32 5.32 0 0 1 2.103.465V2.456A5.629 5.629 0 0 0 9.348 2C6.865 2 5.322 3.291 5.322 5.366c0 .775.195 1.515.399 2.247H4v.972z"/>
+                                </svg>`;
+                    break;
+                default:
+                    imgValuta = "";
+                    break;
+            }
             data.innerHTML = "";
             $('#container').append(`<div id="dati-ETF" class="row"></div>`);
 
@@ -492,24 +513,20 @@ function initETF(simbolo) {
             $('#sinistra').append(`<label><b>Nome:</b> ` + obj.companyName + `</label><br/>
             <label><b>Simbolo:</b> ` + obj.symbol + `</label><br/>
             <label><b>Prezzo:</b> ` + obj.price.toFixed(3) + `</label><br/>
-            <label><b>Valuta:</b> ` + obj.currency + `</label><br/>
+            <label><b>Valuta:</b> ` + imgValuta +'&nbsp('+ obj.currency + `)</label><br/>
             <label><b>Capitalizzazione di mercato:</b> ` + obj.mktCap + `</label><br/>
             
             <br/><br/>`);
 
-            $('#centro').append(`<label><b>Nazione:</b> ` + obj.state + `</label><br/>
-            <label><b>Città:</b> ` + obj.city + `</label><br/>
-            <label><b>Range 52S:</b> ` + obj.range + `</label><br/>
+            $('#centro').append(`<label><b>Range 52S:</b> ` + obj.range + `</label><br/>
             <label><b>Ultimo dividendo:</b> ` + obj.lastDiv.toFixed(3) + `</label><br/>
             <label><b>Exchange:</b> ` + obj.exchangeShortName + `</label><br/>
             <label><b>ISIN:</b> ` + obj.isin + `</label><br/>
             <br/><br/>`);
 
-            $('#destra').append(`<label><b>CEO:</b> ` + obj.ceo + `</label><br/>
-            <label><b>Sito:</b> ` + obj.website + `</label><br/>
+            $('#destra').append(`<label><b>Sito:</b> ` + obj.website + `</label><br/>
             <label><b>Settore:</b> ` + obj.sector + `</label><br/>
             <label><b>Data IPO:</b> ` + obj.ipoDate + `</label><br/>
-            <label><b>Dipendenti:</b> ` + obj.fullTimeEmployees + `</label><br/>
             <br/><br/>`);
 
             $('#sotto').append(`<label><b>Descrizione:</b> ` + obj.description + `</label><br/>
@@ -585,7 +602,7 @@ $(document).ready(function () {
         window.location = './home_azioni.php';
     });
     $('#linkETF').click(function (e) {
-        window.location = './home_ETF.html';
+        window.location = './home_ETF.php';
     });
     $('#linkCrypto').click(function (e) {
 

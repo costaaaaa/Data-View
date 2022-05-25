@@ -168,6 +168,20 @@ switch ($_REQUEST["action"]) {
             header('Location: ../login.html?res=error&azione=vendita');
         }
         break;
+    case "AggiungiPreferito":
+        $simbolo = $_REQUEST['simbolo'];
+        $email = $_SESSION['email'];
+        $query = "INSERT INTO `preferiti` (`idPreferiti`, `simbolo`, `email`) VALUES (NULL, '$simbolo', '$email');";
+        $res = mysqli_query($mysqli, $query);
+        echo "Aggiunto ai preferiti";
+        break;
+    case "RimuoviPreferito":
+        $simbolo = $_REQUEST['simbolo'];
+        $email = $_SESSION['email'];
+        $query = "DELETE FROM `preferiti` WHERE `preferiti`.`simbolo`= '$simbolo' AND `preferiti`.`email`=$email";
+        $res = mysqli_query($mysqli, $query);
+        echo "Rimosso dai preferiti";
+        break;
     default:
         echo "errore request";
         break;

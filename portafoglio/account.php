@@ -12,6 +12,7 @@
         ?> - Data-View
     </title>
     <meta name="description" content="Data-View di Costamagna Andrea">
+    <link rel="icon" href="./img/logo.ico">
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic">
@@ -80,20 +81,101 @@
             <hr class="star-dark mb-5 mx-auto">
 
             <div id="head" class="row">
+                <div class="col">
+                    <h4>Preferiti:</h4>
+                    <?php
+                    include('./api/incl.php');
+                    $email = $_SESSION['email'];
+                    $query = "SELECT `simbolo` FROM `preferiti` WHERE `email`='$email'";
+                    $res = mysqli_query($mysqli, $query);
+                    $dat = mysqli_fetch_assoc($res);
+                    //echo $dat['simbolo'];
+                    echo '<table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Simbolo</th>
+                            </tr>
+                        </thead>
+                        <tdoby>';
+                    for ($i = 0; $i < count($dat['simbolo']); $i++) {
+                        $j = $i + 1;
+                        $simbolo = $dat['simbolo'];
+                        echo '<tr>
+                                <th scope="row">' . $j . '</th>
+                                <td>' . $simbolo . '</td>
+                            </tr> ';
+                    }
+                    echo '</tbody></table>';
+                    ?>
+                </div>
+
+
+                <div class="col">
+                    <h4>Storico movimenti:</h4>
+                    <?php
+                    include('./api/incl.php');
+                    $email = $_SESSION['email'];
+                    $query = "SELECT `simbolo`,`quote`,`prezzo`,`dataTransazione`,`tipo` FROM `buy` WHERE `email`='$email'";
+                    $res = mysqli_query($mysqli, $query);
+                    $dat = mysqli_fetch_assoc($res);
+                    //echo $dat['simbolo'];
+                    echo '<table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Simbolo</th>
+                                <th scope="col">Quote</th>
+                                <th scope="col">Prezzo di acquisto</th>
+                                <th scope="col">Data</th>
+                                <th scope="col">Tipo transazione</th>
+                            </tr>
+                        </thead>
+                        <tdoby>';
+                    for ($i = 0; $i < count($dat['simbolo']); $i++) {
+                        $j = $i + 1;
+                        $simbolo = $dat['simbolo'];
+                        $quote = $dat['quote'];
+                        $prezzo = $dat['prezzo'];
+                        $data = $dat['dataTransazione'];
+                        $tipo = $dat['tipo'];
+                        if ($tipo == 'A') {
+                            $tipo = "Acquisto";
+                        } else {
+                            $tipo = "Vendita";
+                        }
+                        echo '<tr>
+                                <th scope="row">' . $j . '</th>
+                                <td>' . $simbolo . '</td>
+                                <td>' . $quote . '</td>
+                                <td>' . $prezzo . '</td>
+                                <td>' . $data . '</td>
+                                <td>' . $tipo . '</td>
+                            </tr> ';
+                    }
+                    echo '</tbody></table>';
+                    ?>
+                </div>
 
 
 
 
-
+            </div>
+            <br /><br /><br />
+            <div class="row">
                 <form action="./api/index.php" method="POST" class="mx-auto">
                     <input type="hidden" name="action" value="logout">
                     <button class="onboard login-custom-button btn btn-primary" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z" />
+                            <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z" />
+                        </svg>
+                        &nbsp;
                         Log-out
                     </button>
                     <br />
                     <br />
                 </form>
-
             </div>
             <br /><br />
             <div id="spazioDiv"></div>
