@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Creato il: Mag 12, 2022 alle 08:45
+-- Creato il: Mag 18, 2022 alle 14:52
 -- Versione del server: 5.7.34
 -- Versione PHP: 7.4.21
 
@@ -38,15 +38,6 @@ CREATE TABLE `buy` (
   `email` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dump dei dati per la tabella `buy`
---
-
-INSERT INTO `buy` (`idBuy`, `simbolo`, `quote`, `prezzo`, `totale`, `dataTransazione`, `tipo`, `email`) VALUES
-(1, 'MSFT', 5, '270', '1348', '2022/05/11', 'A', 'costamagna551@gmail.com'),
-(2, 'MSFT', 1, '270', '270', '2022/05/11', 'A', 'costamagna551@gmail.com'),
-(3, 'MSFT', 9, '270', '2426', '2022/05/11', 'A', 'costamagna551@gmail.com');
-
 -- --------------------------------------------------------
 
 --
@@ -62,12 +53,17 @@ CREATE TABLE `possedute` (
   `email` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
 --
--- Dump dei dati per la tabella `possedute`
+-- Struttura della tabella `preferiti`
 --
 
-INSERT INTO `possedute` (`idPossedimento`, `simbolo`, `quote`, `prezzo_medio`, `totale`, `email`) VALUES
-(1, 'MSFT', 15, '270', 4050, 'costamagna551@gmail.com');
+CREATE TABLE `preferiti` (
+  `idPreferiti` int(11) NOT NULL,
+  `simbolo` varchar(10) NOT NULL,
+  `email` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -111,6 +107,12 @@ ALTER TABLE `possedute`
   ADD PRIMARY KEY (`idPossedimento`);
 
 --
+-- Indici per le tabelle `preferiti`
+--
+ALTER TABLE `preferiti`
+  ADD PRIMARY KEY (`idPreferiti`);
+
+--
 -- Indici per le tabelle `users`
 --
 ALTER TABLE `users`
@@ -124,13 +126,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT per la tabella `buy`
 --
 ALTER TABLE `buy`
-  MODIFY `idBuy` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idBuy` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `possedute`
 --
 ALTER TABLE `possedute`
-  MODIFY `idPossedimento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idPossedimento` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT per la tabella `preferiti`
+--
+ALTER TABLE `preferiti`
+  MODIFY `idPreferiti` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `users`
