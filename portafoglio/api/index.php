@@ -45,8 +45,10 @@ switch ($_REQUEST["action"]) {
         //header('Location: ../index.php');
         break;
     case 'logout':
+        session_reset();
         $_SESSION['username'] = "";
         $_SESSION['email'] = "";
+        session_destroy();
         echo "success logout";
         header('Location: ../index.php?res=logout&login=false');
         break;
@@ -58,12 +60,14 @@ switch ($_REQUEST["action"]) {
         $res = mysqli_query($mysqli, $query);
         $dat = mysqli_fetch_assoc($res);
         if (password_verify($_REQUEST['password'], $dat['psw'])) {
-            $query = "SELECT `username` FROM `users` WHERE `email`='$email'";
+            $query = "SELECT `username`, `monetaVirtuale` FROM `users` WHERE `email`='$email'";
             $res = mysqli_query($mysqli, $query);
             $dat = mysqli_fetch_assoc($res);
             $username = $dat['username'];
+            $monetaVirtuale = $dat['monetaVirtuale'];
             $_SESSION['username'] = $username;
             $_SESSION['email'] = $email;
+            $_SESSION['monetaVirtuale'] = $monetaVirtuale;
             echo "success login";
             header('Location: ../index.php?res=success&azione=login');
         } else {
@@ -167,6 +171,24 @@ switch ($_REQUEST["action"]) {
         } else {
             header('Location: ../login.html?res=error&azione=vendita');
         }
+        break;
+    case "AggiungiPreferito":
+        $simbolo = $_REQUEST['simbolo'];
+        $nome = $_REQUEST['nome'];
+        $email = $_SESSION['email'];
+        $query = "INSERT INTO `preferiti` (`idPreferiti`, `simbolo`,`nome`, `email`) VALUES (NULL, '$simbolo', '$nome', '$email');";
+        $res = mysqli_query($mysqli, $query);
+        echo "Aggiunto ai preferiti";
+        header('Location: ../azione.php?simbolo=' . $simbolo . '&nome=' . $nome);
+        break;
+    case "RimuoviPreferito":
+        $simbolo = $_REQUEST['simbolo'];
+        $nome = $_REQUEST['nome'];
+        $email = $_SESSION['email'];
+        $query = "DELETE FROM `preferiti` WHERE `preferiti`.`simbolo`= '$simbolo' AND `preferiti`.`email`='$email'";
+        $res = mysqli_query($mysqli, $query);
+        echo "Rimosso dai preferiti";
+        header('Location: ../azione.php?simbolo=' . $simbolo . '&nome=' . $nome);
         break;
     default:
         echo "errore request";
