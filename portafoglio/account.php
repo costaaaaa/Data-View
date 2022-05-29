@@ -95,7 +95,7 @@
                     echo '<table class="table table-striped table-responsive-sm table-responsive-md table-responsive-lg table-hover">
                         <thead class="bg-secondary">
                             <tr>
-                                <th scope="col">#</th>
+                                
                                 <th scope="col">Simbolo</th>
                             </tr>
                         </thead>
@@ -104,12 +104,19 @@
                     while ($dat = mysqli_fetch_object($res)) {
                         $i = $i + 1;
                         echo '<tr>
-                                <th scope="row">' . $i . '</th>
+                                
                                 <td><a class="link-secondary" href="./azione.php?simbolo=' . $dat->simbolo . '&nome=' . $dat->nome . '">' . $dat->simbolo . '</a></td>
                             </tr> ';
                     }
                     echo '</tbody></table>';
                     ?>
+                    <!-- 
+                        intestazione:
+                        <th scope="col">#</th>
+
+                        righe:
+                        <th scope="row">' . $i . '</th>
+                     -->
                 </div>
 
 

@@ -106,17 +106,17 @@ switch ($_REQUEST["action"]) {
                 $res = mysqli_query($mysqli, $query);
                 $possedute = mysqli_fetch_assoc($res);
 
-                if ($res == "") {
-                    //inserisco l'acquisto nella tabella con le azioni possedute dagli utenti
-                    $query = "INSERT INTO `possedute` (`simbolo`, `quote`, `prezzo_medio`, `totale`, `email`) VALUES ('" . $simbolo . "', '" . $nAzioni . "', '" . $prezzo . "', '" . $totale . "', '" . $email . "')";
-                    $res = mysqli_query($mysqli, $query);
-                } else {
+                /* if ($res == "") { */
+                //inserisco l'acquisto nella tabella con le azioni possedute dagli utenti
+                $query = "INSERT INTO `possedute` (`simbolo`, `quote`, `prezzo_medio`, `totale`, `email`) VALUES ('" . $simbolo . "', '" . $nAzioni . "', '" . $prezzo . "', '" . $totale . "', '" . $email . "')";
+                $res = mysqli_query($mysqli, $query);
+                /* } else {
                     $prezzoMedio = ($dat['prezzo_medio'] + $prezzo) / 2;
                     $numeroAzioniTotali = $possedute['quote'] + $nAzioni;
                     $totalePortafoglio = $dat['totale'] + $totale;
                     $query = "UPDATE `possedute` SET `quote`='$numeroAzioniTotali', `prezzo_medio`='$prezzoMedio', `totale`='$totalePortafoglio' WHERE `email`='$email' AND `simbolo`='$simbolo'";
                     $res = mysqli_query($mysqli, $query);
-                }
+                } */
 
                 //rimuovo soldi utente
                 $rimanente = $dat['monetaVirtuale'] - $totale;
@@ -148,14 +148,15 @@ switch ($_REQUEST["action"]) {
             $res = mysqli_query($mysqli, $query);
 
             //seleziono le quote possedute
-            $query = "SELECT `quote` FROM `portafogli` WHERE `email`='$email' AND `simbolo`=$simbolo";
+            $query = "SELECT `simbolo`,SUM(`prezzo_medio`), COUNT(`idPossedimento`), SUM(`quote`) AS quote FROM `possedute` WHERE `email`='$email' GROUP BY `simbolo`";
+            /* SELECT `simbolo`,SUM(`prezzo_medio`), COUNT(`idPossedimento`), SUM(`quote`) AS quote FROM `possedute` WHERE `email`='costamagna551@gmail.com' GROUP BY `simbolo` */
             $res = mysqli_query($mysqli, $query);
             $dat = mysqli_fetch_assoc($res);
             if ($dat['quote'] >= $nAzioni) {
                 $azioniRimanenti = $dat['quote'] - $nAzioni;
 
                 //tolgo le quote dal portafoglio
-                $query = "UPDATE `portafogli` SET `quote`='$azioniRimanenti' WHERE `email`='$email' AND `simbolo`='$simbolo'";
+                $query = "UPDATE `possedute` SET `quote`='$azioniRimanenti' WHERE `email`='$email' AND `simbolo`='$simbolo'";
                 $res = mysqli_query($mysqli, $query);
 
                 //aggiungo i soldi all'utente
