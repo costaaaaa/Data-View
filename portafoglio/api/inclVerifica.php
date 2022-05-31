@@ -57,7 +57,7 @@ $mysqli = @new mysqli(
     $db_password,
     $db_db
 );
-/*
+
 if ($mysqli->connect_error) {
     echo 'Error: ' . $mysqli->connect_errno;
     echo '<br>';
@@ -71,6 +71,5 @@ echo 'Host information: ' . $mysqli->host_info;
 echo '<br>';
 echo 'Protocol version: ' . $mysqli->protocol_version;
 echo '<br/>';
-*/
 
 //$mysqli->close();

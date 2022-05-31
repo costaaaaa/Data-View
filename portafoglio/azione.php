@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>
         <?php
-        $simbolo = $_POST['simbolo'];
+        $simbolo = $_GET['simbolo'];
         echo $simbolo;
         ?> - Data-View
     </title>
+    <link rel="icon" href="./img/logo.ico">
     <meta name="description" content="Data-View di Costamagna Andrea">
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
@@ -18,6 +19,7 @@
     <link rel="stylesheet" href="../assets/css/untitled-1.css">
     <link rel="stylesheet" href="../assets/css/untitled.css">
     <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/azione.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/intro.js@2.9.3/intro.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/intro.js@2.9.3/introjs.css" rel="stylesheet" />
@@ -28,7 +30,7 @@
 
 </head>
 
-<body id="page-top" onload="initAzione('<?php $nome = $_POST['simbolo'];
+<body id="page-top" onload="initAzione('<?php $simbolo = $_GET['simbolo'];
                                         echo $simbolo;
                                         ?>')">
     <nav class=" navbar navbar-light navbar-expand-lg fixed-top bg-secondary text-uppercase" id="mainNav">
@@ -55,7 +57,9 @@
                     if (isset($_SESSION['username'])) {
                         echo '<li class="nav-item mx-0 mx-lg-1" role="presentation" id="linkAccount">
                             <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./account.php">
-                                Account
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                </svg> Account
                             </a>
                         </li>';
                     } else {
@@ -90,8 +94,7 @@
         <br /><br />
         <div class="container">
             <?php
-            $nome = $_POST['nome'];
-            echo '<h2 class="text-uppercase text-center text-secondary">Dati ' . $nome . '</h2>'
+            echo '<h2 class="text-uppercase text-center text-secondary" id="titoloPagina"></h2>'
             ?>
             <hr class="star-dark mb-5 mx-auto">
 
@@ -107,22 +110,21 @@
                     </select>
                     <br />
                     <?php
-                    $nome = $_POST['nome'];
-                    $simbolo = $_POST['simbolo'];
+                    $simbolo = $_GET['simbolo'];
                     echo '<button id="btn-grafico" type="button" class="btn btn-primary" onclick="grafico(`' . $simbolo . '`)">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-graph-up" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z"/>
                             </svg>
                             &nbsp
-                            Aggiorna grafico ' . $nome . '</button>';
+                            Aggiorna grafico</button>';
                     ?>
                 </div>
                 <div class="col">
-                    <br />
                     <form action="./api/index.php" method="POST" class="mx-auto" id="form-acquisto">
                         <input type="hidden" name="action" value="acquisto">
-                        <input type="hidden" name="simbolo" value=<?php $simbolo = $_POST['simbolo'];
+                        <input type="hidden" name="simbolo" value=<?php $simbolo = $_GET['simbolo'];
                                                                     echo $simbolo; ?>>
+                        <label for="numAzioni">Quote da acquistare: </label><br />
                         <input type="number" id="numAzioni" name="numAzioni" placeholder="Numero di azioni" required>
                         <br /><br />
                         <button id="btn-acquista-azione" class="btn btn-primary" type="submit">
@@ -137,6 +139,70 @@
                         </button>
                     </form>
                 </div>
+
+                <?php
+                include('./api/incl.php');
+
+                if ($_SESSION['email'] != "") {
+                    $simbolo = $_GET['simbolo'];
+                    $nome = $_GET['nome'];
+                    $query = "SELECT `simbolo` FROM `preferiti` WHERE `email`='" . $_SESSION['email'] . "' AND `simbolo`='$simbolo'";
+                    $res = mysqli_query($mysqli, $query);
+                    $dat = mysqli_fetch_assoc($res);
+                    if ($dat['simbolo'] == "") {
+                        echo '<div class="col">
+                        <br/>
+                        <form action="./api/index.php" method="POST" class="mx-auto divPreferiti">
+                            <input type="hidden" name="action" value="AggiungiPreferito">
+                            <input type="hidden" name="simbolo" value="' . $simbolo . '">
+                            <input type="hidden" name="nome" value="' . $nome . '">
+
+                            <button class="btn btn-primary" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
+                                    <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z" />
+                                </svg>
+                                &nbsp;Aggiungi ai preferiti
+                            </button>
+                        </form>
+                        </div>';
+                    } else {
+                        echo '<div class="col">
+                        <br/>
+                        <form action="./api/index.php" method="POST" class="mx-auto divPreferiti">
+                            <input type="hidden" name="action" value="RimuoviPreferito">
+                            <input type="hidden" name="simbolo" value="' . $simbolo . '">
+                            <input type="hidden" name="nome" value="' . $nome . '">
+
+                            <button class="btn btn-primary" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                </svg>
+                                &nbsp;Rimuovi dai preferiti
+                            </button>
+                        </form>
+                        </div>';
+                    }
+                }
+
+
+                ?>
+                <!-- 
+
+                <form action="./api/index.php" method="POST" class="mx-auto">
+                    <input type="hidden" name="action" value="AggiungiPreferito">
+                    <input type="hidden" name="simbolo" value="">
+
+                    <button class="btn btn-primary" href="./api/index.php?action=AggiungiPreferito&simbolo=' . $simbolo . '">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
+                            <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z" />
+                        </svg>
+                        &nbsp;Aggiungi ai preferiti
+                    </button>
+                </form> -->
+
+
+
+
             </div>
             <br /><br />
             <div id="containerGrafico" data-intro="Grafico dell'azione" data-step="1">
